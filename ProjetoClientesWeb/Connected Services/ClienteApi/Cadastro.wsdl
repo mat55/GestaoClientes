@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Lista">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListaResult" type="tns:ArrayOfCliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cliente" nillable="true" type="tns:Cliente" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CPF" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Situacao" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sexo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id_Tipo_Cliente" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Id_Situacao_Cliente" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListaUnica">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cpfCli" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListaUnicaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListaUnicaResult" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListaTipos">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListaTiposResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListaTiposResult" type="tns:ArrayOfTipo_Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTipo_Cliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Tipo_Cliente" nillable="true" type="tns:Tipo_Cliente" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Tipo_Cliente">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id_Tipo_Cliente" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListaSituacao">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListaSituacaoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListaSituacaoResult" type="tns:ArrayOfSituacao_Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSituacao_Cliente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Situacao_Cliente" nillable="true" type="tns:Situacao_Cliente" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Situacao_Cliente">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id_Situacao_Cliente" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Descricao" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Insere">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cliente" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsereResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Altere">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cliente" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AltereResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cliente" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ListaSoapIn">
+    <wsdl:part name="parameters" element="tns:Lista" />
+  </wsdl:message>
+  <wsdl:message name="ListaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListaUnicaSoapIn">
+    <wsdl:part name="parameters" element="tns:ListaUnica" />
+  </wsdl:message>
+  <wsdl:message name="ListaUnicaSoapOut">
+    <wsdl:part name="parameters" element="tns:ListaUnicaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListaTiposSoapIn">
+    <wsdl:part name="parameters" element="tns:ListaTipos" />
+  </wsdl:message>
+  <wsdl:message name="ListaTiposSoapOut">
+    <wsdl:part name="parameters" element="tns:ListaTiposResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListaSituacaoSoapIn">
+    <wsdl:part name="parameters" element="tns:ListaSituacao" />
+  </wsdl:message>
+  <wsdl:message name="ListaSituacaoSoapOut">
+    <wsdl:part name="parameters" element="tns:ListaSituacaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsereSoapIn">
+    <wsdl:part name="parameters" element="tns:Insere" />
+  </wsdl:message>
+  <wsdl:message name="InsereSoapOut">
+    <wsdl:part name="parameters" element="tns:InsereResponse" />
+  </wsdl:message>
+  <wsdl:message name="AltereSoapIn">
+    <wsdl:part name="parameters" element="tns:Altere" />
+  </wsdl:message>
+  <wsdl:message name="AltereSoapOut">
+    <wsdl:part name="parameters" element="tns:AltereResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CadastroSoap">
+    <wsdl:operation name="Lista">
+      <wsdl:input message="tns:ListaSoapIn" />
+      <wsdl:output message="tns:ListaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListaUnica">
+      <wsdl:input message="tns:ListaUnicaSoapIn" />
+      <wsdl:output message="tns:ListaUnicaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListaTipos">
+      <wsdl:input message="tns:ListaTiposSoapIn" />
+      <wsdl:output message="tns:ListaTiposSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListaSituacao">
+      <wsdl:input message="tns:ListaSituacaoSoapIn" />
+      <wsdl:output message="tns:ListaSituacaoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Insere">
+      <wsdl:input message="tns:InsereSoapIn" />
+      <wsdl:output message="tns:InsereSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Altere">
+      <wsdl:input message="tns:AltereSoapIn" />
+      <wsdl:output message="tns:AltereSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CadastroSoap" type="tns:CadastroSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Lista">
+      <soap:operation soapAction="http://tempuri.org/Lista" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaUnica">
+      <soap:operation soapAction="http://tempuri.org/ListaUnica" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaTipos">
+      <soap:operation soapAction="http://tempuri.org/ListaTipos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaSituacao">
+      <soap:operation soapAction="http://tempuri.org/ListaSituacao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insere">
+      <soap:operation soapAction="http://tempuri.org/Insere" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Altere">
+      <soap:operation soapAction="http://tempuri.org/Altere" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CadastroSoap12" type="tns:CadastroSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Lista">
+      <soap12:operation soapAction="http://tempuri.org/Lista" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaUnica">
+      <soap12:operation soapAction="http://tempuri.org/ListaUnica" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaTipos">
+      <soap12:operation soapAction="http://tempuri.org/ListaTipos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListaSituacao">
+      <soap12:operation soapAction="http://tempuri.org/ListaSituacao" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insere">
+      <soap12:operation soapAction="http://tempuri.org/Insere" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Altere">
+      <soap12:operation soapAction="http://tempuri.org/Altere" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Cadastro">
+    <wsdl:port name="CadastroSoap" binding="tns:CadastroSoap">
+      <soap:address location="https://localhost:44379/Cadastro.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CadastroSoap12" binding="tns:CadastroSoap12">
+      <soap12:address location="https://localhost:44379/Cadastro.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
