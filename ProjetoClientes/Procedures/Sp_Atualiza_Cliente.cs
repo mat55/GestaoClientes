@@ -32,7 +32,7 @@ namespace ProjetoClientes.Procedures
                 cmd.Parameters.AddWithValue("@Nome", Nome != null ? (object)Nome : (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@CPF", CPF != null ? (object)CPF : (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Sexo", Sexo != null ? (object)Sexo : (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@Id_Tipo_Cliente", @Id_Tipo_Cliente != null ? (object)@Id_Tipo_Cliente : (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Id_Tipo_Cliente", Id_Tipo_Cliente != null ? (object)Id_Tipo_Cliente : (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Id_Situacao_Cliente", Id_Situacao_Cliente != null ? (object)Id_Situacao_Cliente : (object)DBNull.Value);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);

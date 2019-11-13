@@ -1,13 +1,16 @@
-create Procedure Sp_Consulta_Cliente as
+CREATE Procedure Sp_Consulta_Cliente (@CPF varchar(15)) as
 
 select	c.Nome,
 		c.CPF,
-		tc.Descricao,
+		Tipo = tc.Descricao,
+		c.Id_Tipo_Cliente,
 		c.Sexo,
-		sc.Descricao
+		Situacao = sc.Descricao,
+		c.Id_Situacao_Cliente
 from	Tb_Cliente c
 join	Tb_Tipo_Cliente tc on (tc.Id_Tipo_Cliente = c.Id_Tipo_Cliente)
 join	Tb_Situacao_Cliente sc on (sc.Id_Situacao_Cliente = c.Id_Situacao_Cliente)
+where	(c.CPF = @CPF or isnull(@CPF, '') = '')
 
 return
 
@@ -28,11 +31,11 @@ return
 
 GO
 
-create Procedure Sp_Atualiza_Cliente (
+CREATE Procedure Sp_Atualiza_Cliente (
 	@Nome varchar(30),
 	@CPF varchar(15),
-	@Id_Tipo_Cliente int,
 	@Sexo char(1),
+	@Id_Tipo_Cliente int,
 	@Id_Situacao_Cliente int
 ) as
 
@@ -47,8 +50,30 @@ return
 
 GO
 
-create Procedure Sp_Exclui_Cliente (@CPF varchar(15)) as
+create procedure Sp_Exclui_Cliente (@CPF varchar(15)) as
 
-delete from Tb_Cliente where  CPF = @CPF
+delete from Tb_Cliente where CPF = @CPF
 
 return
+
+GO
+
+CREATE Procedure Sp_Consulta_Situacao_Cliente as
+
+select	Id_Situacao_Cliente,
+		Descricao
+from	Tb_Situacao_Cliente
+
+return
+
+GO
+
+CREATE Procedure Sp_Consulta_Tipo_Cliente as
+
+select	Id_Tipo_Cliente,
+		Descricao
+from	Tb_Tipo_Cliente
+
+return
+
+GO

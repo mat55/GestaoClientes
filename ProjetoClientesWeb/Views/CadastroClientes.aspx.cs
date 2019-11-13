@@ -13,14 +13,16 @@ namespace ProjetoClientesWeb.Views
         {
             var CPF = Request.QueryString["CPF"];
 
-
-            if (CPF != null)
+            if (!IsPostBack)
             {
-                DetalhesCliente(CPF);
-            }
-            else
-            {
-                CarregaDropDown();
+                if (CPF != null)
+                {
+                    DetalhesCliente(CPF);
+                }
+                else
+                {
+                    CarregaDropDown();
+                }
             }
         }
 
@@ -28,20 +30,35 @@ namespace ProjetoClientesWeb.Views
         {
             ClienteApi.CadastroSoapClient servico = new ClienteApi.CadastroSoapClient();
 
-            var modelTipo = servico.ListaTipos();
-            var modelSituacao = servico.ListaSituacao();
+            List<ListItem> items = new List<ListItem>();
 
-            foreach (var model in modelTipo)
+            items.Add(new ListItem("(Selecione)", ""));
+
+            foreach (var tipos in servico.ListaTipos())
             {
-                dropTipo.Items.Add(model.Descricao);
+                items.Add(new ListItem(tipos.Descricao, tipos.Id_Tipo_Cliente.ToString()));
+            }
+            dropTipo.Items.Clear();
+            dropTipo.DataSource = items;
+            dropTipo.DataValueField = "Value";
+            dropTipo.DataTextField = "Text";
+            dropTipo.DataBind();
+
+            List<ListItem> items2 = new List<ListItem>();
+
+            items2.Add(new ListItem("(Selecione)", ""));
+
+            foreach (var situacao in servico.ListaSituacao())
+            {
+                items2.Add(new ListItem(situacao.Descricao, situacao.Id_Situacao_Cliente.ToString()));
             }
 
-            foreach (var model in modelSituacao)
-            {
-                dropSituacao.Items.Add(model.Descricao);
-            }
+            dropSituacao.Items.Clear();
+            dropSituacao.DataSource = items2;
+            dropSituacao.DataValueField = "Value";
+            dropSituacao.DataTextField = "Text";
+            dropSituacao.DataBind();
         }
-
 
         protected void Cadastra(object sender, EventArgs e)
         {
@@ -56,6 +73,11 @@ namespace ProjetoClientesWeb.Views
                 if (txtCPF.Text == "")
                 {
                     throw new Exception("Campo CPF é obrigatório");
+                }
+
+                if(txtCPF.Text.Length > 11)
+                {
+                    throw new Exception("Campo CPF deve ter no mínimo 11 caracteres");
                 }
 
                 if (rbSexoM.Checked == false && rbSexoF.Checked == false)
@@ -78,8 +100,8 @@ namespace ProjetoClientesWeb.Views
                 cliente.CPF = txtCPF.Text;
                 cliente.Nome = txtNome.Text;
 
-                string Tipo = dropTipo.SelectedValue;
-                string Situacao = dropSituacao.SelectedValue;
+                string Tipo = dropTipo.SelectedItem.Value;
+                string Situacao = dropSituacao.SelectedItem.Value;
 
                 cliente.Id_Tipo_Cliente = int.Parse(Tipo);
                 cliente.Id_Situacao_Cliente = int.Parse(Situacao);
@@ -116,8 +138,8 @@ namespace ProjetoClientesWeb.Views
                 cliente.CPF = txtCPF.Text;
                 cliente.Nome = txtNome.Text;
 
-                string Tipo = dropTipo.SelectedValue;
-                string Situacao = dropSituacao.SelectedValue;
+                string Tipo = dropTipo.SelectedItem.Value;
+                string Situacao = dropSituacao.SelectedItem.Value;
 
                 cliente.Id_Tipo_Cliente = int.Parse(Tipo);
                 cliente.Id_Situacao_Cliente = int.Parse(Situacao);
@@ -154,6 +176,8 @@ namespace ProjetoClientesWeb.Views
 
             txtNome.Text = model.Nome;
             txtCPF.Text = model.CPF;
+
+            txtCPF.ReadOnly = true;
 
             List<ListItem> items = new List<ListItem>();
             int i = 0;

@@ -29,26 +29,26 @@
                 <div class="col-md-12">
                     <div class="form-group col-md-4">
                         <asp:Label ID="lbNome" runat="server" Text="Nome*"></asp:Label>
-                        <asp:TextBox ID="txtNome" runat="server" CssClass="form-control" ClientIDMode="Inherit"></asp:TextBox>
+                        <asp:TextBox ID="txtNome" runat="server"  CssClass="form-control" ClientIDMode="Inherit" AutoPostBack="true"></asp:TextBox>
                     </div>
                     <div class="form-group col-md-4">
                         <asp:Label ID="lbCPF" runat="server" Text="CPF*"></asp:Label>
-                        <asp:TextBox ID="txtCPF" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtCPF" runat="server"  CssClass="form-control" AutoPostBack="true"></asp:TextBox>
                     </div>
                     <div class="form-group col-md-2">
                         <asp:Label ID="lbTipo" runat="server" Text="Tipo de Cliente*"></asp:Label>
-                        <asp:DropDownList ID="dropTipo" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="dropTipo" runat="server"  CssClass="form-control" AutoPostBack="true">
                             <asp:ListItem Value="">(Selecione)</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="form-group col-md-4">
                         <asp:Label ID="lbSexo" runat="server" Text="Sexo*"></asp:Label>
-                        <asp:RadioButton ID="rbSexoM" GroupName="rbSexo" runat="server" Text="Masculino" />
-                        <asp:RadioButton ID="rbSexoF" GroupName="rbSexo" runat="server" Text="Feminino" />
+                        <asp:RadioButton ID="rbSexoM" GroupName="rbSexo" runat="server"  Text="Masculino" AutoPostBack="true" />
+                        <asp:RadioButton ID="rbSexoF" GroupName="rbSexo" runat="server"  Text="Feminino" AutoPostBack="true" />
                     </div>
                     <div class="form-group col-md-2">
                         <asp:Label ID="lbSituacao" runat="server" Text="Situação do Cliente*"></asp:Label>
-                        <asp:DropDownList ID="dropSituacao" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="dropSituacao" runat="server"  CssClass="form-control" AutoPostBack="true">
                             <asp:ListItem Value="">(Selecione)</asp:ListItem>
                         </asp:DropDownList>
                     </div>
